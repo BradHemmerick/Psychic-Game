@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>psychic
+  </title>
+</head>
+
+<body>
+    <h1>Psychic Game</h1
+    <p id="guessLeft"></p>
+  <div id="game">
+
+  </div>
+
+  <script type="text/javascript">
+
+ var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var wins = 0;
+var losses = 0;
+var guessesLeft = 10;
+var alreadyGuess =[];
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+document.onkeyup = function(Event) {
+  var userGuess = event.key;
+  userGuess = event.key.toLowerCase();
+  
+  if (userGuess != computerGuess) {
+    guessesLeft--;
+  }
+  if (userGuess === computerGuess) {
+    wins++;
+    guessesLeft = 10;
+    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+  }
+  if (guessesLeft < 1) {
+    losses++;
+    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+  }
+  if (guessesLeft === 0) {
+    guessesLeft = 10;
+    alreadyGuess = [];
+  }
+  if (computerChoices.indexOf(userGuess) === -1) {
+    userGuess = "Invalid";
+    
+  }
+  alreadyGuess.push(userGuess);
+  var score = 
+  "<p>You Chose: " + userGuess + "</p>" +
+  "<p> Victories " + wins + "</p>" +
+  "<p> Defeats " + losses + "</p>" +
+  "<p> Remaining Guesses " + guessesLeft + "</p>" +
+  "<p> You Have Gussed " + alreadyGuess + "</p>"
+  ;
+  document.getElementById("game").innerHTML = score;
+  document.getElementById("guess").innerHTML = guessesLeft;
+}
+
+  </script>
+
+</body>
+
+</html>
