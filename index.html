@@ -16,13 +16,13 @@
 
   <script type="text/javascript">
 
- var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var computerPicks = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var wins = 0;
 var losses = 0;
 var guessesLeft = 10;
-var alreadyGuess =[];
-var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-document.onkeyup = function(Event) {
+var usersInput =[];
+var computerGuess = computerPicks[Math.floor(Math.random() * computerPicks.length)];
+document.onkeydown = function(Event) {
   var userGuess = event.key;
   userGuess = event.key.toLowerCase();
   
@@ -32,27 +32,27 @@ document.onkeyup = function(Event) {
   if (userGuess === computerGuess) {
     wins++;
     guessesLeft = 10;
-    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    computerGuess = computerPicks[Math.floor(Math.random() * computerPicks.length)];
   }
   if (guessesLeft < 1) {
     losses++;
-    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    computerGuess = computerPicks[Math.floor(Math.random() * computerPicks.length)];
   }
   if (guessesLeft === 0) {
     guessesLeft = 10;
-    alreadyGuess = [];
+    usersInputs = [];
   }
-  if (computerChoices.indexOf(userGuess) === -1) {
+  if (computerPicks.indexOf(userGuess) === -1) {
     userGuess = "Invalid";
     
   }
-  alreadyGuess.push(userGuess);
+  usersInput.push(userGuess);
   var score = 
   "<p>You Chose: " + userGuess + "</p>" +
   "<p> Victories " + wins + "</p>" +
   "<p> Defeats " + losses + "</p>" +
   "<p> Remaining Guesses " + guessesLeft + "</p>" +
-  "<p> You Have Gussed " + alreadyGuess + "</p>"
+  "<p> You Have Gussed " + usersInput + "</p>"
   ;
   document.getElementById("game").innerHTML = score;
   document.getElementById("guess").innerHTML = guessesLeft;
